@@ -9,6 +9,7 @@ import { Chart } from 'chart.js/auto';  // Import Chart.js
 })
 export class HomePage implements OnInit {
 
+  //backgroundImage = 'assets/images/DALL.png'; // background image
 
   constructor(private router: Router) {}
 
