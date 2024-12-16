@@ -10,10 +10,15 @@ Chart.register(...registerables);
   templateUrl: './energy.page.html',
   styleUrls: ['./energy.page.scss'],
 })
+<<<<<<< HEAD
+export class MetricsPage implements OnInit, ViewChild,AfterViewInit {zed
+  @ViewChild('energyChart') energyChartCanvas!: ElementRef<HTMLCanvasElement>;
+=======
 export class EnergyPage implements OnInit {
   energyData: { location: string; usage: number }[] = [];
   totalUsage: number = 0;
   chart: any;
+>>>>>>> 422df919cf09b0d6dbc7a306b64c90c91dd79ed8
 
   constructor(private energyService: EnergyService) {}
 
