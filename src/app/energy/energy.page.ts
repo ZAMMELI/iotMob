@@ -6,7 +6,7 @@ import { Chart } from 'chart.js/auto';
   templateUrl: './metrics.page.html',
   styleUrls: ['./metrics.page.scss'],
 })
-export class MetricsPage implements OnInit, ViewChild,AfterViewInit {
+export class MetricsPage implements OnInit, ViewChild,AfterViewInit {zed
   @ViewChild('energyChart') energyChartCanvas!: ElementRef<HTMLCanvasElement>;
 
   weatherChart: any;
