@@ -1,55 +1,81 @@
-import { Component, OnInit, ViewChild,AfterViewInit, ElementRef } from '@angular/core';
-import { Chart } from 'chart.js/auto';
+import { Component, OnInit } from '@angular/core';
+import { Chart, registerables } from 'chart.js/auto';
+import { EnergyService } from './energy.service';
+import { interval, Subscription } from 'rxjs';
+
+Chart.register(...registerables);
 
 @Component({
-  selector: 'app-metrics',
-  templateUrl: './metrics.page.html',
-  styleUrls: ['./metrics.page.scss'],
+  selector: 'app-energy',
+  templateUrl: './energy.page.html',
+  styleUrls: ['./energy.page.scss'],
 })
+<<<<<<< HEAD
 export class MetricsPage implements OnInit, ViewChild,AfterViewInit {zed
   @ViewChild('energyChart') energyChartCanvas!: ElementRef<HTMLCanvasElement>;
+=======
+export class EnergyPage implements OnInit {
+  energyData: { location: string; usage: number }[] = [];
+  totalUsage: number = 0;
+  chart: any;
+>>>>>>> 422df919cf09b0d6dbc7a306b64c90c91dd79ed8
 
-  weatherChart: any;
-  energyChart: any;
-
-  constructor() {}
+  constructor(private energyService: EnergyService) {}
 
   ngOnInit() {
-    this.loadEnergyChart();
+    this.fetchEnergyData();
   }
 
-  
-  loadEnergyChart() {
-    const buildings = ['Building A', 'Building B'];
-    const energyData = [700, 820]; // Total energy used
+  fetchEnergyData() {
+    this.energyService.getEnergyMetrics().subscribe((data) => {
+      this.energyData = data;
+      this.totalUsage = data.reduce((sum, entry) => sum + entry.usage, 0);
+      this.createChart();
+    });
+  }
 
-    this.energyChart = new Chart(this.energyChartCanvas.nativeElement, {
+  createChart() {
+    const canvas = document.getElementById('energyChart') as HTMLCanvasElement | null;
+
+    if (!canvas) {
+      console.error('Canvas element not found!');
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      console.error('Failed to get 2D context for canvas!');
+      return;
+    }
+
+    if (this.chart) {
+      this.chart.destroy(); // Reset the chart if it already exists
+    }
+
+    this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: buildings,
+        labels: this.energyData.map((entry) => entry.location),
         datasets: [
           {
-            label: 'Energy Used (kWh)',
-            data: energyData,
-            backgroundColor: ['#36A2EB', '#FF6384'], // Different colors for bars
+            label: 'Energy Usage (kWh)',
+            data: this.energyData.map((entry) => entry.usage),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
           },
         ],
       },
       options: {
         responsive: true,
-        plugins: {
-          legend: { display: true },
-        },
         scales: {
-          x: {
-            title: { display: true, text: 'Buildings' },
-          },
           y: {
-            title: { display: true, text: 'Energy (kWh)' },
             beginAtZero: true,
           },
         },
       },
     });
   }
+
 }
