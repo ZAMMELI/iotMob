@@ -1,29 +1,41 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Energy Metrics</ion-title>
+    <ion-title>Energy Manager</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
   <ion-img src="../../assets/images/DALL.png" class="background-image"></ion-img>
-  <!-- Total Energy Usage Card -->
+
+  <!-- Energy Header Section -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Energy</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Total Consumption Card -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Total Energy Usage</ion-card-title>
+      <ion-card-title>Total Consumption</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h1>{{ totalUsage }} kWh</h1>
+      <h1>{{ totalConsommation }} kWh</h1>
     </ion-card-content>
   </ion-card>
 
-  <!-- Chart Display -->
+  <!-- Energy Consumption by Location -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Energy Usage by Location</ion-card-title>
+      <ion-card-title>Energy Consumption by Location</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <canvas id="energyChart"></canvas>
+      <ion-list>
+        <ion-item *ngFor="let item of consommationData">
+          <ion-label>{{ item.location }}: {{ item.consommation }} kWh</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
+
 </ion-content>
