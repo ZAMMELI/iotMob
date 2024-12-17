@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Energy Manager</ion-title>
+    <ion-title color="dark">Energy Manager</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,23 +19,35 @@
     <ion-card-header>
       <ion-card-title>Total Consumption</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content style="color: rgb(52, 13, 228);">
       <h1>{{ totalConsommation }} kWh</h1>
     </ion-card-content>
   </ion-card>
 
   <!-- Energy Consumption by Location -->
-  <ion-card>
+  <ion-card color="primary">
     <ion-card-header>
       <ion-card-title>Energy Consumption by Location</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let item of consommationData">
-          <ion-label>{{ item.location }}: {{ item.consommation }} kWh</ion-label>
+          <ion-label style="color: rgb(228, 160, 13);">{{ item.location }}: {{ item.consommation }} kWh</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
 </ion-content>
+
+<ion-footer >
+  <!-- cards blocs -->
+  <ion-card color="warning">
+    <ion-card-header>
+      <ion-card-title>Powred by LIYCA Tech</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      © 2024
+    </ion-card-content>
+  </ion-card>
+  </ion-footer>
