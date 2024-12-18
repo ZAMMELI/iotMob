@@ -1,18 +1,18 @@
+// energy.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class EnergyService {
-  private apiUrl = 'https://your-server.com/api/energy-metrics'; // Replace with your API endpoint
+  private apiUrl = 'http://localhost:3000/api/energy';  // Your backend URL
 
   constructor(private http: HttpClient) {}
 
-  getEnergyMetrics(): Observable<{ location: string; usage: number }[]> {
-    return this.http.get<{ location: string; usage: number }[]>(this.apiUrl);
+  // Fetch energy data from the backend
+  getEnergyData(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 }
-
-

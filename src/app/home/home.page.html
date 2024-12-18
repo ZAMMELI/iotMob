@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title >
-      Welcome to My Ionic App
+    <ion-title color="dark">
+      SMART BUILDING App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <<ion-img src="../../assets/images/DALL.png" class="background-image"></ion-img>
+  <ion-img src="../../assets/images/DALL.png" class="background-image"></ion-img>
 
   <ion-grid>
     <ion-row>
@@ -59,19 +59,32 @@
 </ion-content>
 <!-- items of lists blocs -->
 <ion-list>
-  <ion-item button (click)="goToPage('energy')">Energy manager</ion-item>
-  <ion-item button (click)="goToPage('air')">Air manager</ion-item>
-  <ion-item button (click)="goToPage('safe')">Security & Safe</ion-item>
-  <ion-item button (click)="goToPage('history')">History</ion-item>
+  <ion-item button (click)="goToPage('energy')">
+      <ion-icon name="battery-charging"></ion-icon>
+      <p style="margin-left:2em">  Energy manager </p>
+  </ion-item>
+  <ion-item button (click)="goToPage('air')">
+    <ion-icon name="reload-circle-sharp"></ion-icon>
+    <p style="margin-left:2em">  Air manager </p>
+  </ion-item>
+  <ion-item button (click)="goToPage('safe')">
+    <ion-icon name="shield-checkmark-sharp"></ion-icon>
+    <p style="margin-left:2em">  Security & Safe </p>
+  </ion-item>
+  <ion-item button (click)="goToPage('history')">
+    <ion-icon name="server-sharp"></ion-icon>
+    <p style="margin-left:2em"> History </p>
+  </ion-item>
 </ion-list>
 
-
+<ion-footer >
 <!-- cards blocs -->
-<ion-card>
+<ion-card color="warning">
   <ion-card-header>
-    <ion-card-title>Welcome to My Card</ion-card-title>
+    <ion-card-title>Powred by LIYCA Tech</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    This is a simple example of an Ionic card.
+    © 2024
   </ion-card-content>
 </ion-card>
+</ion-footer>
