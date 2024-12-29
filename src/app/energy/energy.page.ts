@@ -1,4 +1,5 @@
 
+//energy.page.ts
 import { Component, OnInit } from '@angular/core';
 import { EnergyService } from './energy.service';
 
@@ -20,6 +21,7 @@ export class EnergyPage implements OnInit {
   fetchConsommation() {
     this.energyService.getEnergyData().subscribe(
       (response) => {
+        console.log('Fetched data:', response);  // Check if data is returned
         this.consommationData = response.data;
         this.totalConsommation = this.consommationData.reduce(
           (sum, item) => sum + item.consommation,
