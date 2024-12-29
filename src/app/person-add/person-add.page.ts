@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { PersonAddService } from './person-add.service';
 import { Router } from '@angular/router';  // Import Router
@@ -25,7 +26,7 @@ export class PersonAddPage {
         console.log('Signup successful:', response);
         alert('Signup successful!');
         this.router.navigate(['/home']);// Navigate to home page after successful signup
-        
+
         // Clear the form fields after successful signup
         this.userData = {
           username: '',
