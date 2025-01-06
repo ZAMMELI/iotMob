@@ -11,6 +11,8 @@ export class PersonAddService {
   constructor(private http: HttpClient) {}
 
   registerUser(userData: any): Observable<any> {
+    console.log('Sending user data:', userData); // Log user data to check before sending
     return this.http.post(`${this.baseUrl}/signup`, userData);
   }
+
 }

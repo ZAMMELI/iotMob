@@ -1,7 +1,6 @@
-
-//energy.page.ts
 import { Component, OnInit } from '@angular/core';
-import { EnergyService } from './energy.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-energy',
@@ -9,27 +8,33 @@ import { EnergyService } from './energy.service';
   styleUrls: ['./energy.page.scss'],
 })
 export class EnergyPage implements OnInit {
-  consommationData: any[] = [];
   totalConsommation: number = 0;
+  consommationData: any[] = []; // Array to hold energy data
 
-  constructor(private energyService: EnergyService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.fetchConsommation();
+    this.fetchEnergyData();
   }
 
-  fetchConsommation() {
-    this.energyService.getEnergyData().subscribe(
-      (response) => {
-        console.log('Fetched data:', response);  // Check if data is returned
-        this.consommationData = response.data;
+  fetchEnergyData() {
+    const token = localStorage.getItem('token'); // Get JWT token from localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http.get('http://localhost:3000/api/energy', { headers }).subscribe(
+      (response: any) => {
+        this.consommationData = response.energyData;
+
+        // Calculate total consumption
         this.totalConsommation = this.consommationData.reduce(
           (sum, item) => sum + item.consommation,
           0
         );
       },
       (error) => {
-        console.error('Error fetching data:', error);
+        console.error('Failed to fetch energy data.', error);
       }
     );
   }
