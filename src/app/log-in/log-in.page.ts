@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LogInService } from './log-in.service';
-import { Router } from '@angular/router';  // Import Router for navigation
 
 @Component({
   selector: 'app-log-in',
@@ -13,22 +13,18 @@ export class LogInPage {
     password: '',
   };
 
-  constructor(
-    private logInService: LogInService,
-    private router: Router  // Inject Router into the constructor
-  ) {}
+  constructor(private loginService: LogInService, private router: Router) {}
 
   onLogin() {
-    this.logInService.loginUser(this.userData).subscribe(
+    this.loginService.authenticate(this.userData).subscribe(
       (response) => {
-        console.log('Login successful:', response);
+        localStorage.setItem('token', response.token); // Store token
         alert('Login successful!');
-        // Navigate to home or dashboard page
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']); // Redirect to home
       },
       (error) => {
-        console.error('Error during login:', error);
-        alert('Login failed. Please try again.');
+        console.error('Login failed:', error);
+        alert('Login failed. Please check your credentials.');
       }
     );
   }

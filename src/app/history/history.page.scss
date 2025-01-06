@@ -18,3 +18,20 @@
   text-align: center;
   padding: 20px;
 }
+
+ion-card {
+  margin: 20px;
+}
+
+ion-grid {
+  width: 100%;
+  text-align: center;
+}
+
+ion-row {
+  border-bottom: 1px solid #ccc;
+}
+
+ion-row:last-child {
+  border-bottom: none;
+}
